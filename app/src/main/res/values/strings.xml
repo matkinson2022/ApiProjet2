@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Api project</string>
+    <string name="food">food</string>
+    <string name="hits">hits</string>
+    <string name="published" />
+    <string name="publisheddate">published</string>
+    <string name="tempingredients">ingrediants</string>
+</resources>
