@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         hitNumber = findViewById(R.id.hitNumber);
         published = findViewById(R.id.published);
         ingredientsText = findViewById(R.id.ingredientsText);
+        afficher();
     }
 
     @Override
@@ -75,7 +76,22 @@ public class MainActivity extends AppCompatActivity {
         JsonObjectRequest jsonObjectRequest= new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                try {
+                    int totalHits = response.getInt("totalHits");
+                    String totalHitsString = String.valueOf(totalHits);
+                    hitNumber.setText(totalHitsString);
+                    JSONArray foods = response.getJSONArray("foods");
+                    JSONObject food_object = foods.getJSONObject(0);
 
+
+
+                    foodName.setText(food_object.getString("description"));
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
             }
         }, new Response.ErrorListener() {
