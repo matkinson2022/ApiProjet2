@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 maNouriture=query;
-               // afficher();
+               afficher();
 
                 InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                 if(getCurrentFocus() != null){
@@ -72,22 +72,25 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void  afficher(){
-        String url = "https://api.nal.usda.gov/fdc/v1/foods/search?api_key=w6XvNOqDCgi4z8otEsvChm18EI0E3JNl3de8sxgU&query=cheddar%20cheese";
+        String url = "https://api.nal.usda.gov/fdc/v1/foods/search?api_key=w6XvNOqDCgi4z8otEsvChm18EI0E3JNl3de8sxgU&query="+maNouriture;
         JsonObjectRequest jsonObjectRequest= new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    JSONObject total = response.getJSONObject("totalHits");
-                    Log.d("tag", "respone = "+ total.toString());
-                  /*  int totalHits = response.getInt("totalHits");
-                    String totalHitsString = String.valueOf(totalHits);
-                    hitNumber.setText(totalHitsString);
+
+                   String totalHits = response.getString("totalHits");
+
+                    hitNumber.setText("Il y a "+totalHits+" produits sous cette nom");
                     JSONArray foods = response.getJSONArray("foods");
                     JSONObject food_object = foods.getJSONObject(0);
+                    String description =  food_object.getString("lowercaseDescription");
+                    String Ingrediants = food_object.getString("ingredients");
+                    String publishedDate = food_object.getString("publishedDate");
 
+                    ingredientsText.setText("Ce produit est constituer de: "+Ingrediants);
+                    foodName.setText("Le nom du produit rechercher est: "+description);
+                    published.setText("Cette produit fut produit depuis "+publishedDate);
 
-
-                    foodName.setText(food_object.getString("description")); */
 
 
 
