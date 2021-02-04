@@ -72,12 +72,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void  afficher(){
-        String url = "https://api.nal.usda.gov/fdc/v1/foods/search?api_key=w6XvNOqDCgi4z8otEsvChm18EI0E3JNl3de8sxgU&query="+"maNouriture";
+        String url = "https://api.nal.usda.gov/fdc/v1/foods/search?api_key=w6XvNOqDCgi4z8otEsvChm18EI0E3JNl3de8sxgU&query=cheddar%20cheese";
         JsonObjectRequest jsonObjectRequest= new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    int totalHits = response.getInt("totalHits");
+                    JSONObject total = response.getJSONObject("totalHits");
+                    Log.d("tag", "respone = "+ total.toString());
+                  /*  int totalHits = response.getInt("totalHits");
                     String totalHitsString = String.valueOf(totalHits);
                     hitNumber.setText(totalHitsString);
                     JSONArray foods = response.getJSONArray("foods");
@@ -85,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                    foodName.setText(food_object.getString("description"));
+                    foodName.setText(food_object.getString("description")); */
 
 
 
